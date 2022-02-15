@@ -7,7 +7,8 @@ class home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blueGrey[800],
+
         title: const Center(
           child: Text(
             'Hisab Rakhi',
@@ -18,37 +19,54 @@ class home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              width: 300.0,
-              height: 100.0,
-              child: RaisedButton(
-                child: const Text(
-                  'Sign Up',
-                  style: TextStyle(fontSize: 20),
-                ),
-                color: Colors.red,
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
-                },
+            ElevatedButton(
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(fontSize: 20,color: Colors.blueGrey),
               ),
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: 300.0,
-              height: 100.0,
-              child: RaisedButton(
-                child: const Text(
-                  'Sign In',
-                  style: TextStyle(fontSize: 20),
+              onPressed: () {
+                Navigator.pushNamed(context, '/signup');
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 140, vertical: 23),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                color: Colors.red,
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signin');
-                },
+                textStyle: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    )
               ),
-            ),
+
+              ),
+
+      Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ElevatedButton(
+          child: const Text(
+            'Sign In',
+            style: TextStyle(fontSize: 20,color: Colors.blueGrey),
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/signin');
+          },
+          style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 140, vertical: 23),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              textStyle: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              )
+          ),
+
+        ),
+      ),
+
+
           ],
         ),
       ),

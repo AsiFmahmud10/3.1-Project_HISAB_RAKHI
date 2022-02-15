@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'signup.dart';
-import 'signin.dart';
+import 'package:hisab_khata/signin.dart';
+import 'package:hisab_khata/_signup.dart';
+import 'package:hisab_khata/home.dart';
+
+import '_home.dart';
+
+
 
 void main() {
   runApp(
@@ -16,8 +20,8 @@ class MyApp extends StatelessWidget {
       //home: home(),
       initialRoute: '/',
       routes: {
-        '/': (context) => home(),
-        '/signup': (context) => signup(),
+        '/': (context) => Home(),
+        '/signup': (context) => SignUp(),
         '/signin': (context) => signin(),
       },
     );
