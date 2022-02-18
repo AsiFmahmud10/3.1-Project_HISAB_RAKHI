@@ -3,6 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hisab_khata/custom/_input.dart';
+import 'package:hive/hive.dart';
+
+import 'db.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -12,8 +15,31 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
+  late Box<UserData> userData;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    initUser();
+  }
+
+  void initUser ()async {
+    userData = await Hive.openBox('userData');
+
+  }
+  void addUser(UserData user)async{
+    await userData.add(user);
+  }
+
+void getUserData(){
+  print(userData.get(0)!.username);
+}
+
+
+
+
+  @override
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[800],
@@ -31,6 +57,7 @@ class _SignUpState extends State<SignUp> {
 
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+
               CustomInput(hint : "Email",label: 'Email',),
               CustomInput(hint : "Phone Number",label: 'Phone Number',),
               CustomInput(hint : "Pin",label: 'Pin',password: true),
@@ -41,7 +68,9 @@ class _SignUpState extends State<SignUp> {
                 width: 150,
                 height: 50,
                 child: TextButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      addUser( new UserData("asif","asif","asif"));
+                    },
                     child: Text("Confirm",
                     style: TextStyle(color: Colors.blueGrey),),
                   style: ElevatedButton.styleFrom(
@@ -52,6 +81,24 @@ class _SignUpState extends State<SignUp> {
 
                   ),
                 ),
+              Container(
+                margin: EdgeInsets.only(top:30),
+                width: 150,
+                height: 50,
+                child: TextButton(
+                  onPressed: (){
+                    getUserData();
+                  },
+                  child: Text("Confirm",
+                    style: TextStyle(color: Colors.blueGrey),),
+                  style: ElevatedButton.styleFrom(
+                      side: BorderSide(width: 2,color: Colors.grey) ,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      primary: Colors.white,
+                      textStyle:TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+
+                ),
+              ),
 
 
             ],
