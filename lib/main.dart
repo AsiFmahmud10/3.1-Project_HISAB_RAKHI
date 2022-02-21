@@ -12,6 +12,8 @@ void main() async{
 
   await Hive.initFlutter();
   Hive.registerAdapter(UserDataAdapter());
+  await Hive.openBox('userData');
+
   runApp(
     MyApp(),
   );

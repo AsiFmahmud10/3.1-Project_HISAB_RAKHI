@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hisab_khata/custom/_input.dart';
@@ -16,26 +14,56 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  late Box<UserData> userData;
+  late Box userData = Hive.box('userData');
+  late String userName ='';
+  late String pin ='';
+  late String phoneNumber ='';
+  late String username ='';
+
+
+
+
   @override
   void initState() {
     super.initState();
-    initUser();
-  }
-
-  void initUser ()async {
-    userData = await Hive.openBox('userData');
+    print(userData.values.toList());
+    //initUser();
 
   }
-  void addUser(UserData user)async{
-    await userData.add(user);
+
+  void initUser (){
+    print("I AM RUNNING");
+    //userData = Hive.box('userData');
+    print(Hive.box('userData').values.toList());
+  }
+  void addUser(UserData user){
+    print(user.toString());
+     //userData =  await Hive.openBox('userData');
+     userData.putAt(0,user);
+    print('----------add user');
   }
 
-void getUserData(){
-  print(userData.get(0)!.username);
+void getUserData(index){
+  print(userData.get(index)!.username);
+  print(userData.get(index)!.pin);
+  print(userData.get(index)!.number);
 }
+ void Data ;
+  void getData(String inputData , String label){
+     print('$label $inputData');
+    if(label == 'Username'){
+      username = inputData;
+         print(username);
+      }else if(label == 'Phone Number'){
+         phoneNumber = inputData;
+         print(phoneNumber);
 
+    }else if(label == 'Pin'){
+         pin = inputData;
+         print(pin);
 
+    }
+  }
 
   @override
   Widget build(BuildContext context){
@@ -57,10 +85,10 @@ void getUserData(){
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
 
-              CustomInput(hint : "Email",label: 'Email',),
-              CustomInput(hint : "Phone Number",label: 'Phone Number',),
-              CustomInput(hint : "Pin",label: 'Pin',password: true),
-              CustomInput(hint : "Confirm Pin",label: 'Confirm Pin',password: true),
+              CustomInput(hint : "Username",label: 'Username',getData:getData),
+              CustomInput(hint : "Phone Number",label: 'Phone Number',getData:getData),
+              CustomInput(hint : "Pin",label: 'Pin',password: true,getData:getData),
+              CustomInput(hint : "Confirm Pin",label: 'Confirm Pin',password: true,getData:getData),
 
               Container(
                 margin: EdgeInsets.only(top:30),
@@ -68,7 +96,12 @@ void getUserData(){
                 height: 50,
                 child: TextButton(
                     onPressed: (){
-                      addUser( new UserData("asif","asif","asif"));
+                        print('---------b email ${username} Pin ${pin} phone ${phoneNumber} ');
+                        addUser( new UserData(username,pin,phoneNumber));
+                        Navigator.pushNamed(context, '/');
+
+                      //----------------------
+                        //addUser( new UserData("errorwhy","errorwhy","errorwhy"));//------------------------------------
                     },
                     child: Text("Confirm",
                     style: TextStyle(color: Colors.blueGrey),),
@@ -86,7 +119,7 @@ void getUserData(){
                 height: 50,
                 child: TextButton(
                   onPressed: (){
-                    getUserData();
+                    getUserData(1);
                   },
                   child: Text("Confirm",
                     style: TextStyle(color: Colors.blueGrey),),
@@ -104,6 +137,6 @@ void getUserData(){
           ),
         ),
       ),
-    );;
+    );
   }
 }
