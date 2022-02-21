@@ -92,28 +92,3 @@ class signup extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-/*import 'package:flutter/material.dart';
-
-class signup extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 13, 58, 117),
-        title: Text('signup'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          color: Colors.red,
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
-}*/

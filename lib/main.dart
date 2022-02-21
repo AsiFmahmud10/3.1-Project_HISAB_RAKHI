@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hisab_khata/db.dart';
 import 'package:hisab_khata/signin.dart';
 import 'package:hisab_khata/_signup.dart';
+import 'package:hisab_khata/menu.dart';
 import 'package:hisab_khata/home.dart';
 import '_home.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 
-
-void main() async{
-
+void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserDataAdapter());
   runApp(
@@ -24,7 +23,8 @@ class MyApp extends StatelessWidget {
       //home: home(),
       initialRoute: '/',
       routes: {
-        '/': (context) => Home(),
+        //'/': (context) => home(),
+        '/': (context) => menu(),
         '/signup': (context) => SignUp(),
         '/signin': (context) => signin(),
       },
