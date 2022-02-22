@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hisab_khata/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:hisab_khata/custom/_input.dart';
 import 'package:hive/hive.dart';
@@ -14,13 +15,12 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
+
   late Box userData = Hive.box('userData');
   late String userName ='';
   late String pin ='';
   late String phoneNumber ='';
   late String username ='';
-
-
 
 
   @override
@@ -36,6 +36,7 @@ class _SignUpState extends State<SignUp> {
     //userData = Hive.box('userData');
     print(Hive.box('userData').values.toList());
   }
+
   void addUser(UserData user){
     print(user.toString());
      //userData =  await Hive.openBox('userData');
@@ -48,7 +49,9 @@ void getUserData(index){
   print(userData.get(index)!.pin);
   print(userData.get(index)!.number);
 }
+
  void Data ;
+
   void getData(String inputData , String label){
      print('$label $inputData');
     if(label == 'Username'){
@@ -63,14 +66,14 @@ void getUserData(index){
          print(pin);
 
     }
+
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[800],
-
         title: const Center(
           child: Text(
             'HISAB RAKHI',
@@ -81,9 +84,9 @@ void getUserData(index){
         child: Container(
           width: 336,
           child: Column(
-
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+
 
               CustomInput(hint : "Username",label: 'Username',getData:getData),
               CustomInput(hint : "Phone Number",label: 'Phone Number',getData:getData),
@@ -91,14 +94,15 @@ void getUserData(index){
               CustomInput(hint : "Confirm Pin",label: 'Confirm Pin',password: true,getData:getData),
 
               Container(
-                margin: EdgeInsets.only(top:30),
+                margin: EdgeInsets.only(top: 30),
                 width: 150,
                 height: 50,
                 child: TextButton(
+
                     onPressed: (){
                         print('---------b email ${username} Pin ${pin} phone ${phoneNumber} ');
                         addUser( new UserData(username,pin,phoneNumber));
-                        Navigator.pushNamed(context, '/');
+                        Navigator.pushNamed(context, '/menu');
 
                       //----------------------
                         //addUser( new UserData("errorwhy","errorwhy","errorwhy"));//------------------------------------
@@ -111,32 +115,15 @@ void getUserData(index){
                     primary: Colors.white,
                     textStyle:TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
 
-                  ),
-                ),
-              Container(
-                margin: EdgeInsets.only(top:30),
-                width: 150,
-                height: 50,
-                child: TextButton(
-                  onPressed: (){
-                    getUserData(1);
-                  },
-                  child: Text("Confirm",
-                    style: TextStyle(color: Colors.blueGrey),),
-                  style: ElevatedButton.styleFrom(
-                      side: BorderSide(width: 2,color: Colors.grey) ,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      primary: Colors.white,
-                      textStyle:TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
 
                 ),
               ),
-
 
             ],
           ),
         ),
       ),
     );
+
   }
 }

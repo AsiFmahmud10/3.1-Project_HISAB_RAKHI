@@ -53,17 +53,16 @@ void inputData(){
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(showInfo),
-                    Text(userData.get(0).pin ),//----------------------------------------,
+                    //Text(userData.get(0).pin ),//----------------------------------------,
                     Container(
                       alignment: Alignment.center,
                       width: 340,
                       child: TextField(
+                        obscureText: true,
                         onSubmitted: (submittedPin){
                            print(submittedPin);
                           if(submittedPin == userData.get(0).pin){//------------------------
-                            setState(() {
-                              showInfo = "Ok";
-                            });
+                              Navigator.pushNamed(context, '/menu');
                           }else{
                             setState(() {
                               showInfo = "Invalid Pin";
@@ -84,11 +83,13 @@ void inputData(){
                       ),
 
                     ),
+
                     Container(
                         width: 219,
                         margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
                         child: GestureDetector(
                             onTap: (){
+
                               Navigator.pushNamed(context, '/signup');
                             },
                             child: Row(children: [
