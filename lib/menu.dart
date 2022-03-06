@@ -139,7 +139,9 @@ class menu extends StatelessWidget {
               Container(
                 child: Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/search');
+                    },
                     child: Text(
                       'Customer',
                       style: TextStyle(
