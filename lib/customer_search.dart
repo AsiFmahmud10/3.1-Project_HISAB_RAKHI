@@ -116,13 +116,37 @@ class _searchState extends State<search> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      /*floatingActionButton: FloatingActionButton.extended(
+
         onPressed: () {
           Navigator.pushNamed(context, '/add');
         },
         label: const Text('ADD'),
         icon: const Icon(Icons.add),
         backgroundColor: Color.fromARGB(255, 11, 168, 230),
+      ),*/
+      body: Container(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 250),
+          child: Column(
+             children: [
+               Center(
+                 child: SizedBox(
+                   width: 250,
+                   height: 70,
+                   child:ElevatedButton(onPressed: (){
+                     Navigator.pushNamed(context, '/add');
+                   }, child: Text("ADD CUSTOMER"),
+                     style: ButtonStyle(
+
+                     ),
+                   ),
+                 ),
+               ),
+
+             ],
+          ),
+        ),
       ),
     );
   }
