@@ -15,7 +15,7 @@ class menu extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 204, 4, 21),
+        backgroundColor:Color.fromARGB(255, 11, 168, 230),
         child: ListView(
           children: [
             DrawerHeader(
@@ -25,7 +25,7 @@ class menu extends StatelessWidget {
                     'Hisab Rakhi',
                     style: TextStyle(
                       fontSize: 50,
-                      color: Color.fromARGB(255, 15, 15, 15),
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -42,6 +42,7 @@ class menu extends StatelessWidget {
                 'Home',
                 style: TextStyle(
                   fontSize: 18,
+                    color: Colors.white,
                 ),
               ),
               onTap: () {},
@@ -53,6 +54,7 @@ class menu extends StatelessWidget {
                 'Customer',
                 style: TextStyle(
                   fontSize: 18,
+                    color: Colors.white
                 ),
               ),
               onTap: () {},
@@ -64,6 +66,7 @@ class menu extends StatelessWidget {
                 'Report',
                 style: TextStyle(
                   fontSize: 18,
+                    color: Colors.white,
                 ),
               ),
               onTap: () {},
@@ -75,6 +78,7 @@ class menu extends StatelessWidget {
                 'Setting',
                 style: TextStyle(
                   fontSize: 18,
+                    color: Colors.white,
                 ),
               ),
               onTap: () {},
@@ -140,7 +144,7 @@ class menu extends StatelessWidget {
                 child: Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/search');
+                      Navigator.pushNamed(context, '/');
                     },
                     child: Text(
                       'Customer',

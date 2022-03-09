@@ -13,7 +13,10 @@ import 'package:hive/hive.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserDataAdapter());
+  Hive.registerAdapter(CustomerAdapter());
+
   await Hive.openBox('userData');
+  await Hive.openBox('customerData');
 
   runApp(
     MyApp(),
@@ -26,15 +29,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       //home: home(),
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
         '/': (context) => search(),
         '/menu': (context) => menu(),
         '/signup': (context) => SignUp(),
         '/signin': (context) => signin(),
         //'/search': (context) => search(),
-        //'/home': (context) => home()
-        '/add': (context) => signup(),
+        '/home': (context) => Home(),
+        '/add': (context) => AddCustomer(),
       },
     );
   }

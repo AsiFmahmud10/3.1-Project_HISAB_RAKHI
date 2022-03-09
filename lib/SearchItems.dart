@@ -1,12 +1,42 @@
-class Customer {
-  final String name;
-  final int tk;
+import 'package:hive/hive.dart';
 
-  Customer({required this.tk, required this.name});
-}
+import 'db.dart';
+import 'package:flutter/material.dart';
 
 List<Customer> customerDetails = [
-  Customer(name: "Abish", tk: 106),
+
+];
+
+class CustomerDetails extends StatefulWidget {
+  const CustomerDetails({Key? key}) : super(key: key);
+
+  @override
+  _CustomerDetailsState createState() => _CustomerDetailsState();
+}
+
+class _CustomerDetailsState extends State<CustomerDetails> {
+  late Box customerData = Hive.box('customerData');
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+
+
+
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+
+
+/*
+*  Customer(name: "Abish", tk: 106),
   Customer(name: "Bob", tk: 267),
   Customer(name: "Charlie", tk: 773),
   Customer(name: "Dany", tk: 476),
@@ -15,4 +45,5 @@ List<Customer> customerDetails = [
   Customer(name: "Gayathri", tk: 67),
   Customer(name: "Hendry", tk: 866),
   Customer(name: "Ishya", tk: 669),
-];
+*
+* */

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
-import 'package:hisab_khata/SearchItems.dart';
+//import 'package:hisab_khata/SearchItems.dart';
+
+import 'db.dart';
+
+List<Customer> customerDetails = [] ;
 
 class search extends StatefulWidget {
   @override
@@ -8,6 +13,22 @@ class search extends StatefulWidget {
 }
 
 class _searchState extends State<search> {
+
+  late var customerData = Hive.box('customerData');
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //customerData.add(Customer(customerName: "Sehedi", customerPhone: '01721'));
+      print('run');
+      var customer =  customerData.values.toList();
+      customerDetails= new List<Customer>.from(customer);;
+      print(customerDetails.length);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +163,7 @@ class StudentSearch extends SearchDelegate<Customer> {
     final listItems = query.isEmpty
         ? customerDetails
         : customerDetails
-            .where((element) => element.name
+            .where((element) => element.customerName
                 .toLowerCase()
                 .startsWith(query.toLowerCase().toString()))
             .toList();
@@ -161,9 +182,9 @@ class StudentSearch extends SearchDelegate<Customer> {
                           Icons.person,
                           size: 40,
                         ),
-                        title: Text(listItems[index].name),
+                        title: Text(listItems[index].customerName),
                         subtitle: Text(
-                            "Due Blance : ${(listItems[index].tk.toString())}"),
+                            "Due Blance : ${(listItems[index].dueBalance.toString())}"),
                         onTap: () {
                           showResults(context);
                         },

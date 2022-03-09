@@ -14,3 +14,17 @@ class UserData{
 
 }
 
+@HiveType(typeId: 2)
+class Customer {
+  @HiveField(0)
+  String customerName;
+  @HiveField(1)
+  String customerEmail;
+  @HiveField(2)
+  String customerPhone;
+  @HiveField(3)
+  int dueBalance = 0;
+
+  Customer({this.dueBalance=0,
+    required this.customerName,required this.customerPhone,this.customerEmail='Email is not given'});
+}

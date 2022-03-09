@@ -1,15 +1,30 @@
-import 'package:flutter/material.dart';
 
-class signup extends StatelessWidget {
+
+import 'package:flutter/material.dart';
+import 'package:hisab_khata/db.dart';
+import 'package:hive/hive.dart';
+
+class AddCustomer extends StatelessWidget {
   get child => null;
+
+  final customerNameController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+
 
   @override
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  void validate() {
+  bool validate() {
     if (formkey.currentState!.validate()) {
+      Hive.box('customerData').add(Customer(customerName: nameController.text,
+          customerEmail: emailController.text,
+          customerPhone: phoneController.text));
       print('Ok');
+      return true;
     } else {
+      return false;
       print('required');
     }
   }
@@ -23,87 +38,91 @@ class signup extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 11, 168, 230),
-          title: const Center(
-            child: Text("Hisab Rakhi"),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 11, 168, 230),
+        title: const Center(
+          child: Text("Hisab Rakhi"),
         ),
-        drawer: Drawer(
-          backgroundColor: Color.fromARGB(255, 11, 168, 230),
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: (Container(
-                  child: const Center(
-                    child: Text(
-                      'Hisab Rakhi',
-                      style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.white,
-                      ),
+      ),
+      drawer: Drawer(
+        backgroundColor: Color.fromARGB(255, 11, 168, 230),
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: (Container(
+                child: const Center(
+                  child: Text(
+                    'Hisab Rakhi',
+                    style: TextStyle(
+                      fontSize: 50,
+                      color: Colors.white,
                     ),
                   ),
-                  //color: Color.fromARGB(255, 7, 145, 214),
-                )),
-              ),
-              Divider(
-                thickness: 4.0,
-              ),
-              ListTile(
-                iconColor: Colors.white,
-                leading: Icon(Icons.home),
-                title: const Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
                 ),
-                onTap: () {},
-              ),
-              ListTile(
-                iconColor: Colors.white,
-                leading: Icon(Icons.person),
-                title: const Text(
-                  'Customer',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
+                //color: Color.fromARGB(255, 7, 145, 214),
+              )),
+            ),
+            Divider(
+              thickness: 4.0,
+            ),
+            ListTile(
+              iconColor: Colors.white,
+              leading: Icon(Icons.home),
+              title: const Text(
+                'Home',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
                 ),
-                onTap: () {},
               ),
-              ListTile(
-                iconColor: Colors.white,
-                leading: Icon(Icons.report),
-                title: const Text(
-                  'Report',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
+              onTap: () {},
+            ),
+            ListTile(
+              iconColor: Colors.white,
+              leading: Icon(Icons.person),
+              title: const Text(
+                'Customer',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
                 ),
-                onTap: () {},
               ),
-              ListTile(
-                iconColor: Colors.white,
-                leading: Icon(Icons.settings),
-                title: const Text(
-                  'Setting',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
+              onTap: () {},
+            ),
+            ListTile(
+              iconColor: Colors.white,
+              leading: Icon(Icons.report),
+              title: const Text(
+                'Report',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
                 ),
-                onTap: () {},
               ),
-            ],
-          ),
+              onTap: () {},
+            ),
+            ListTile(
+              iconColor: Colors.white,
+              leading: Icon(Icons.settings),
+              title: const Text(
+                'Setting',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ),
+              onTap: () {},
+            ),
+          ],
         ),
-        body: Padding(
+      ),
+      body: WillPopScope(
+        onWillPop: ()async{
+           Navigator.pop(context,false);
+           return Future.value(false);
+        },
+        child: Padding(
           padding: EdgeInsets.all(25.0),
           child: Form(
             key: formkey,
@@ -113,6 +132,7 @@ class signup extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.0),
                   child: TextFormField(
+                    controller: nameController,
                     decoration: const InputDecoration(
                       labelText: 'Customer Name',
                       border: OutlineInputBorder(),
@@ -123,6 +143,7 @@ class signup extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.0),
                   child: TextFormField(
+                    controller: emailController,
                     decoration: const InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
@@ -133,7 +154,9 @@ class signup extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.0),
                   child: TextFormField(
+                    controller: phoneController,
                     decoration: const InputDecoration(
+
                       labelText: 'Phone Number',
                       border: OutlineInputBorder(),
                     ),
@@ -142,7 +165,13 @@ class signup extends StatelessWidget {
                 ),
                 RaisedButton(
                     color: Color.fromARGB(255, 11, 168, 230),
-                    onPressed: validate,
+                    onPressed:() {
+                      bool temp = validate();
+                      if(temp){
+                        Navigator.pushNamed(context, '/');
+                      }
+
+                },
                     child: const Text(
                       "Add",
                       style: TextStyle(
