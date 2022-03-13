@@ -26,6 +26,9 @@ class _searchState extends State<search> {
       var customer =  customerData.values.toList();
       customerDetails= new List<Customer>.from(customer);;
       print(customerDetails.length);
+
+    print('-------');
+    print(customer[12].customerName);
   }
 
 
@@ -211,6 +214,10 @@ class StudentSearch extends SearchDelegate<Customer> {
                             "Due Blance : ${(listItems[index].dueBalance.toString())}"),
                         onTap: () {
                           showResults(context);
+                          Navigator.pushReplacementNamed(context, '/home',arguments: {
+                             'customer_id': listItems[index].customerName
+                            //ModalRoute.of(context)?.settings.arguments;
+                          });
                         },
                       ),
                       Divider(),

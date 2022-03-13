@@ -25,6 +25,20 @@ class Customer {
   @HiveField(3)
   int dueBalance = 0;
 
+
   Customer({this.dueBalance=0,
     required this.customerName,required this.customerPhone,this.customerEmail='Email is not given'});
+}
+
+@HiveType(typeId:3)
+class Report{
+  @HiveField(0)
+  int customerGiven;
+  @HiveField(1)
+  int customerDue;
+  @HiveField(3)
+  var reportDate;
+  @HiveField(4)
+  String details='';
+  Report({this.customerDue=0,this.customerGiven=0,required reportDate,required details});
 }

@@ -14,20 +14,23 @@ class _HomeState extends State<Home> {
 
   late Box userData;
   late String showInfo =' ' ;
+  var data;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-
   }
 void inputData(){
 
 }
-
   @override
   Widget build(BuildContext context) {
+
+
+
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[800],

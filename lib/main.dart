@@ -14,9 +14,12 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserDataAdapter());
   Hive.registerAdapter(CustomerAdapter());
+  Hive.registerAdapter(ReportAdapter());
+
 
   await Hive.openBox('userData');
   await Hive.openBox('customerData');
+  await Hive.openBox('reportData');
 
   runApp(
     MyApp(),
