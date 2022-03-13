@@ -28,7 +28,7 @@ class _searchState extends State<search> {
       print(customerDetails.length);
 
     print('-------');
-    print(customer[12].customerName);
+    print(customerDetails[12].key);
   }
 
 
@@ -215,7 +215,9 @@ class StudentSearch extends SearchDelegate<Customer> {
                         onTap: () {
                           showResults(context);
                           Navigator.pushReplacementNamed(context, '/home',arguments: {
-                             'customer_id': listItems[index].customerName
+                            'customer_id' : listItems[index].key,
+                            'customerName': listItems[index].customerName
+
                             //ModalRoute.of(context)?.settings.arguments;
                           });
                         },

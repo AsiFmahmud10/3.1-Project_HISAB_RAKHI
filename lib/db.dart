@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 part 'db.g.dart';
 
 @HiveType(typeId: 1)
-class UserData{
+class UserData {
   @HiveField(0)
   late String username;
   @HiveField(1)
@@ -15,7 +15,7 @@ class UserData{
 }
 
 @HiveType(typeId: 2)
-class Customer {
+class Customer extends HiveObject{
   @HiveField(0)
   String customerName;
   @HiveField(1)
