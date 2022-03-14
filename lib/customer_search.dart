@@ -21,11 +21,15 @@ class _searchState extends State<search> {
     // TODO: implement initState
     super.initState();
     //customerData.add(Customer(customerName: "Sehedi", customerPhone: '01721'));
-    print('run');
-    var customer = customerData.values.toList();
-    customerDetails = new List<Customer>.from(customer);
-    ;
-    print(customerDetails.length);
+
+      print('run');
+      var customer =  customerData.values.toList();
+      customerDetails= new List<Customer>.from(customer);;
+      print(customerDetails.length);
+
+    print('-------');
+    print(customerDetails[12].key);
+
   }
 
   @override
@@ -208,8 +212,13 @@ class StudentSearch extends SearchDelegate<Customer> {
                         subtitle: Text(
                             "Due Blance : ${(listItems[index].dueBalance.toString())}"),
                         onTap: () {
-                          //showResults(context);
-                          Navigator.pushNamed(context, '/detail');
+                          showResults(context);
+                          Navigator.pushReplacementNamed(context, '/addReport',arguments: {
+                            'customer_id' : listItems[index].key,
+                            'customerName': listItems[index].customerName
+
+                            //ModalRoute.of(context)?.settings.arguments;
+                          });
                         },
                       ),
                       Divider(),

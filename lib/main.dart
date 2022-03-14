@@ -16,9 +16,12 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserDataAdapter());
   Hive.registerAdapter(CustomerAdapter());
+  Hive.registerAdapter(ReportAdapter());
+
 
   await Hive.openBox('userData');
   await Hive.openBox('customerData');
+  await Hive.openBox('reportData');
 
   runApp(
     MyApp(),
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => search(),
-        '/detail': (context) => CustomerDetail(),
+        '/addReport': (context) => CustomerDetail(),
         '/menu': (context) => menu(),
         '/signup': (context) => SignUp(),
         '/signin': (context) => signin(),

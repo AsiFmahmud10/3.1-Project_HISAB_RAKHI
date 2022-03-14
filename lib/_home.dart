@@ -20,14 +20,16 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
 
-
   }
 void inputData(){
 
 }
-
   @override
   Widget build(BuildContext context) {
+
+
+
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[800],

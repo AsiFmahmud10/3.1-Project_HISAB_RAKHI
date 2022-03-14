@@ -1,20 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
-class CustomerDetail extends StatelessWidget {
+import 'db.dart';
+
+class CustomerDetail extends StatefulWidget {
+  @override
+  State<CustomerDetail> createState() => _CustomerDetailState();
+}
+
+class _CustomerDetailState extends State<CustomerDetail> {
   get child => null;
 
-  final customerDue = TextEditingController();
-  final get = TextEditingController();
-  final description = TextEditingController();
+  var data;
+  final customerDue = TextEditingController(text:'');
+
+  final deposit = TextEditingController(text:'');
+
+  final description = TextEditingController(text: '');
+  Box reportDb = Hive.box('reportData');
+
 
   @override
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  void validate() {
+  bool validate() {
     if (formkey.currentState!.validate()) {
+      print('---------------');
+        if(customerDue.text.length == 0){
+            customerDue.text ='0';
+        }
+        if(deposit.text.length == 0){
+          deposit.text = '0';
+        }
+       reportDb.put(data['customer_id'], Report(
+           reportDate: DateTime.now(),
+           details: description.text,
+           customerGiven:int.parse(deposit.text),
+           customerDue: int.parse(customerDue.text)
+       ));
+      print(reportDb.values.toList());
       print('Ok');
+      return true;
     } else {
       print('required');
+      return false;
     }
   }
 
@@ -26,12 +55,20 @@ class CustomerDetail extends StatelessWidget {
     }
   }
 
+
+
+
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context)!.settings.arguments ;
+    print(data);
+    //print(reportDb.toString());
+    print(reportDb.values.toList());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 11, 168, 230),
-        title: const Center(
-          child: Text("Customer name"),
+        title:  Center(
+          child: Text(data['customerName']),
         ),
         actions: [
           TextButton(
@@ -132,7 +169,7 @@ class CustomerDetail extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.0),
                   child: TextFormField(
-                    controller: get,
+                    controller: deposit,
                     decoration: const InputDecoration(
                       labelText: 'Get',
                       border: OutlineInputBorder(),
@@ -164,7 +201,11 @@ class CustomerDetail extends StatelessWidget {
                 ),
                 RaisedButton(
                     color: Color.fromARGB(255, 11, 168, 230),
-                    onPressed: () {},
+                    onPressed: () {
+                      if(validate()){
+                          Navigator.pushNamed(context, '/');
+                      }
+                    },
                     child: const Text(
                       "Confirm",
                       style: TextStyle(
