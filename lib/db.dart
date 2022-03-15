@@ -38,18 +38,20 @@ class Report{
   int customerGiven;
   @HiveField(1)
   int customerDue;
+
   @HiveField(3)
   var reportDate;
   @HiveField(4)
-  String details='';
+  String details;
 
   String toString(){
     return jsonEncode({
       'deposit' : customerGiven,
       'due' : customerDue,
       'date': reportDate,
+      'details': details
     });
   }
 
-  Report({this.customerDue=0,this.customerGiven=0,required reportDate,required details});
+  Report({this.customerDue=0,this.customerGiven=0,required this.reportDate,required this.details});
 }

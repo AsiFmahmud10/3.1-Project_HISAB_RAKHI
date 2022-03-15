@@ -16,7 +16,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
 
   final deposit = TextEditingController(text:'');
 
-  final description = TextEditingController(text: '');
+  final description = TextEditingController();
   Box reportDb = Hive.box('reportData');
 
 
@@ -32,8 +32,10 @@ class _CustomerDetailState extends State<CustomerDetail> {
         if(deposit.text.length == 0){
           deposit.text = '0';
         }
+        var date =DateTime.now().toString().substring(0,10);
+        print(date);
        reportDb.put(data['customer_id'], Report(
-           reportDate: DateTime.now(),
+           reportDate:date,
            details: description.text,
            customerGiven:int.parse(deposit.text),
            customerDue: int.parse(customerDue.text)

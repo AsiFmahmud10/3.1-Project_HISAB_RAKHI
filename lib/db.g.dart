@@ -103,7 +103,7 @@ class ReportAdapter extends TypeAdapter<Report> {
       customerDue: fields[1] as int,
       customerGiven: fields[0] as int,
       reportDate: fields[3] as dynamic,
-      details: fields[4] as dynamic,
+      details: fields[4] as String,
     );
   }
 
