@@ -5,6 +5,7 @@ import 'package:hisab_khata/_signup.dart';
 import 'package:hisab_khata/menu.dart';
 import 'package:hisab_khata/home.dart';
 import 'package:hisab_khata/signup.dart';
+import 'package:hisab_khata/report_table.dart';
 import 'package:hisab_khata/customer_detail.dart';
 
 import '_home.dart';
@@ -17,7 +18,6 @@ void main() async {
   Hive.registerAdapter(UserDataAdapter());
   Hive.registerAdapter(CustomerAdapter());
   Hive.registerAdapter(ReportAdapter());
-
 
   await Hive.openBox('userData');
   await Hive.openBox('customerData');
@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
       //home: home(),
       initialRoute: '/',
       routes: {
-        '/': (context) => search(),
+        //'/': (context) => search(),
+        '/': (context) => DataReport(),
         '/addReport': (context) => CustomerDetail(),
         '/menu': (context) => menu(),
         '/signup': (context) => SignUp(),
