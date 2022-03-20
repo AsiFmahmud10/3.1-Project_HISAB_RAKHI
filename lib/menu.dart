@@ -10,7 +10,7 @@ class menu extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 204, 4, 21),
+        backgroundColor: Colors.blueGrey[800],
         title: const Center(
           child: Text(
             'Hisab Rakhi',
@@ -110,11 +110,11 @@ class menu extends StatelessWidget {
                         ),
                       ),
                       style: TextButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 243, 81, 6),
+                          backgroundColor: Colors.deepPurple,
                           padding: EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 150),
+                          minimumSize: Size(120, 100),
                           shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0))),
+                              borderRadius: new BorderRadius.circular(15.0))),
                     ),
                   ),
                   const SizedBox(
@@ -127,15 +127,15 @@ class menu extends StatelessWidget {
                         'Overall Due',
                         style: TextStyle(
                           fontSize: 20,
-                          color: Color.fromARGB(255, 251, 254, 255),
+                          color: Colors.white,
                         ),
                       ),
                       style: TextButton.styleFrom(
                           backgroundColor: Colors.green,
                           padding: EdgeInsets.all(10.0),
-                          minimumSize: Size(150, 150),
+                          minimumSize: Size(120, 100),
                           shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0))),
+                              borderRadius: new BorderRadius.circular(15.0))),
                     ),
                   )
                 ],
@@ -152,16 +152,16 @@ class menu extends StatelessWidget {
                     child: Text(
                       'Customer',
                       style: TextStyle(
-                        fontSize: 40,
-                        color: Color.fromARGB(255, 251, 254, 255),
+                        fontSize: 35,
+                        color: Colors.white,
                       ),
                     ),
                     style: TextButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 13, 199, 231),
-                      padding: EdgeInsets.all(10.0),
-                      minimumSize: Size(400, 150),
+                      backgroundColor: Colors.blueGrey,
+                      padding: EdgeInsets.all(6.0),
+                      minimumSize: Size(350, 120),
                       shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
+                        borderRadius: new BorderRadius.circular(15.0),
                       ),
                     ),
                   ),

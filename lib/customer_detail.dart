@@ -12,7 +12,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
   get child => null;
 
   var data;
-  final customerDue = TextEditingController(text:'');
+  final customerGiven = TextEditingController(text:'');
 
   final deposit = TextEditingController(text:'');
 
@@ -26,19 +26,20 @@ class _CustomerDetailState extends State<CustomerDetail> {
   bool validate() {
     if (formkey.currentState!.validate()) {
       print('---------------');
-        if(customerDue.text.length == 0){
-            customerDue.text ='0';
+        if(customerGiven.text.length == 0){
+          customerGiven.text ='0';
         }
         if(deposit.text.length == 0){
           deposit.text = '0';
         }
-        var date =DateTime.now().toString().substring(0,10);
-        print(date);
+
+        int customerDue = int.parse(deposit.text) -  int.parse(customerGiven.text);
+
        reportDb.put(data['customer_id'], Report(
-           reportDate:date,
+           reportDate:DateTime.now().toString().substring(0,10),
            details: description.text,
            customerGiven:int.parse(deposit.text),
-           customerDue: int.parse(customerDue.text)
+           customerDue:customerDue
        ));
       print(reportDb.values.toList());
       print('Ok');
@@ -68,18 +69,22 @@ class _CustomerDetailState extends State<CustomerDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 11, 168, 230),
+        backgroundColor: Colors.blueGrey[600],
         title:  Center(
           child: Text(data['customerName']),
         ),
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text('Report'),
-            style: TextButton.styleFrom(
-              textStyle: TextStyle(fontSize: 20),
-              primary: Colors.white,
-              backgroundColor: Colors.transparent,
+          SizedBox(
+
+            width: 100,
+            child: TextButton(
+              onPressed: () {},
+              child: Text('REPORT'),
+              style: TextButton.styleFrom(
+                textStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                primary: Colors.pink,
+                backgroundColor: Colors.white,
+              ),
             ),
           ),
         ],
@@ -182,7 +187,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.0),
                   child: TextFormField(
-                    controller: customerDue,
+                    controller: customerGiven,
                     decoration: const InputDecoration(
                       labelText: 'Due',
                       border: OutlineInputBorder(),
@@ -201,22 +206,27 @@ class _CustomerDetailState extends State<CustomerDetail> {
                     validator: emailvalidate,
                   ),
                 ),
-                RaisedButton(
-                    color: Color.fromARGB(255, 11, 168, 230),
-                    onPressed: () {
-                      if(validate()){
-                          Navigator.pushNamed(context, '/');
-                      }
-                    },
-                    child: const Text(
-                      "Confirm",
-                      style: TextStyle(
-                        color: Colors.white,
+                SizedBox(
+                  width: 160,
+                  height: 50,
+                  child: RaisedButton(
+
+                      color: Colors.pink[400],
+                      onPressed: () {
+                        if(validate()){
+                            Navigator.pushNamed(context, '/');
+                        }
+                      },
+                      child: const Text(
+                        "Confirm",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28.0),
-                    )),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      )),
+                ),
               ],
             ),
           ),

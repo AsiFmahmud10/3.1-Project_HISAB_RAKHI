@@ -101,7 +101,7 @@ void getUserData(index){
 
                     onPressed: (){
                         print('---------b email ${username} Pin ${pin} phone ${phoneNumber} ');
-                        addUser( new UserData(username,pin,phoneNumber));
+                        addUser(UserData(username: username,pin: pin,number: phoneNumber ));
                         Navigator.pushNamed(context, '/menu');
 
                       //----------------------

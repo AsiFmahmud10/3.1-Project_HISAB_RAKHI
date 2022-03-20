@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       //home: home(),
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
         '/': (context) => search(),
         '/addReport': (context) => CustomerDetail(),

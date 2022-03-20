@@ -32,7 +32,7 @@ void inputData(){
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[800],
+        backgroundColor: Colors.redAccent,
 
         title: const Center(
           child: Text(
@@ -101,7 +101,7 @@ void inputData(){
                                   style:TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
-                                    color: Colors.blueGrey[600],
+                                    color: Colors.pink,
 
                                   )
                               )

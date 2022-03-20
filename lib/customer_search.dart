@@ -37,7 +37,7 @@ class _searchState extends State<search> {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text("Search Customer")),
-        backgroundColor: Color.fromARGB(255, 11, 168, 230),
+        backgroundColor: Colors.blueGrey[800],
         actions: [
           IconButton(
             onPressed: () {

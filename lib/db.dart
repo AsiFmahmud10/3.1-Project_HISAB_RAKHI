@@ -2,17 +2,28 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 part 'db.g.dart';
-
+//flutter pub run build_runner build --delete-conflicting-outputs
 @HiveType(typeId: 1)
 class UserData {
   @HiveField(0)
-  late String username;
+   late String username;
   @HiveField(1)
-  late String pin;
+   late String pin;
   @HiveField(2)
-  late String number;
+   late String number;
+  @HiveField(3)
+  double? oveallSell;
+  @HiveField(4)
+  double? oveallDue;
 
-  UserData( this.username, this.pin, this.number);
+  UserData(
+      {required this.username,
+        required this.pin,
+        required this.number,
+      this.oveallDue = 0.0,
+      this.oveallSell = 0.0
+      });
+
 
 }
 
