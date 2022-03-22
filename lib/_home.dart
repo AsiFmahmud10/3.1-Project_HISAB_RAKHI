@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hisab_khata/db.dart';
-import 'package:hisab_khata/dbclass.dart';
+
 import 'package:hive/hive.dart';
+import 'package:lottie/lottie.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -28,9 +29,8 @@ void inputData(){
   Widget build(BuildContext context) {
 
 
-
-
     return Scaffold(
+      resizeToAvoidBottomInset:false ,
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
 
@@ -50,11 +50,13 @@ void inputData(){
               );
             }else{
               userData  = snapshot.data!;
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              return Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(showInfo),
+                    SizedBox(
+                        height: 120),
                     //Text(userData.get(0).pin ),//----------------------------------------,
                     Container(
                       alignment: Alignment.center,
@@ -104,7 +106,8 @@ void inputData(){
                                     color: Colors.pink,
 
                                   )
-                              )
+                              ),
+
                             ],
 
                             )
@@ -112,9 +115,13 @@ void inputData(){
                         )
                     ),
 
+                    SizedBox(
+                        height: 30),
+                    Lottie.network('https://assets4.lottiefiles.com/packages/lf20_x8bgchwo.json'),
+                  // Lottie.asset('assets/type.json'),
 
                   ],
-                ),
+
               );
             }
           }else{

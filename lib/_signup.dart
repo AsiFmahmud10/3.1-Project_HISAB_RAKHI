@@ -3,7 +3,6 @@ import 'package:hisab_khata/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:hisab_khata/custom/_input.dart';
 import 'package:hive/hive.dart';
-
 import 'db.dart';
 
 class SignUp extends StatefulWidget {
@@ -73,7 +72,7 @@ void getUserData(index){
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[800],
+        backgroundColor: Colors.redAccent,
         title: const Center(
           child: Text(
             'HISAB RAKHI',

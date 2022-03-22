@@ -21,8 +21,8 @@ void main() async {
 
   await Hive.openBox('userData');
   await Hive.openBox('customerData');
-  await Hive.openBox('reportData');
-
+  var box = await Hive.openBox('reportData');
+  //await box.clear();
   runApp(
     MyApp(),
   );
@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
       //home: home(),
       initialRoute: '/home',
       routes: {
-        //'/': (context) => search(),
-        '/': (context) => DataReport(),
+        '/': (context) => search(),
+        '/showRepot': (context) => DataReport(),
         '/addReport': (context) => CustomerDetail(),
         '/menu': (context) => menu(),
         '/signup': (context) => SignUp(),

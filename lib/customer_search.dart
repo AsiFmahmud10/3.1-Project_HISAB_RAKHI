@@ -119,15 +119,7 @@ class _searchState extends State<search> {
           ],
         ),
       ),
-      /*floatingActionButton: FloatingActionButton.extended(
 
-        onPressed: () {
-          Navigator.pushNamed(context, '/add');
-        },
-        label: const Text('ADD'),
-        icon: const Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 11, 168, 230),
-      ),*/
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(top: 250),

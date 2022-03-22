@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hisab_khata/user_report_data.dart';
+import 'package:hisab_khata/db.dart';
+import 'package:hive/hive.dart';
 
 class DataReport extends StatefulWidget {
   const DataReport({Key? key}) : super(key: key);
@@ -9,52 +10,49 @@ class DataReport extends StatefulWidget {
 }
 
 class _DataReportState extends State<DataReport> {
-  late List<UserReoprtData> user;
 
-  void initState() {
-    user = UserReoprtData.getUsers();
+  List reportData = Hive.box('reportData').values.toList();
+
+   var data ;
+   void initState() {
     super.initState();
+    print('----------');
+    print(reportData);
   }
 
   DataTable dataBody() {
     return DataTable(
       columns: [
+
         DataColumn(
-          label: Text('Name'),
-          numeric: false,
-          tooltip: "Name",
-        ),
-        DataColumn(
-          label: Text('Due'),
+          label: Text('Date'),
           numeric: false,
           tooltip: "Due",
         ),
         DataColumn(
-          label: Text('Deposit'),
+          label: Text('Due'),
           numeric: false,
           tooltip: "Deposit",
         ),
         DataColumn(
-          label: Text('Name'),
+          label: Text('Given'),
           numeric: false,
           tooltip: "Name",
         ),
       ],
-      rows: user
+      rows: reportData
           .map((UserReoprtData) => DataRow(
                 cells: [
                   DataCell(
-                    Text(UserReoprtData.name),
+                    Text(UserReoprtData.reportDate ?? 'null'),
                   ),
                   DataCell(
-                    Text(UserReoprtData.Due.toString()),
+                    Text(UserReoprtData.customerDue.toString()  ?? 'null'),
                   ),
                   DataCell(
-                    Text(UserReoprtData.deposit.toString()),
+                    Text(UserReoprtData.customerGiven.toString() ?? 'null' ),
                   ),
-                  DataCell(
-                    Text(UserReoprtData.date),
-                  ),
+
                 ],
               ))
           .toList(),
@@ -63,9 +61,16 @@ class _DataReportState extends State<DataReport> {
 
   @override
   Widget build(BuildContext context) {
+
+    data =  ModalRoute.of(context)!.settings.arguments ;
+    print(data);
+    String customerName = data['name'] ;
+    String id = data['id'].toString();
+
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Report")),
+          backgroundColor: Colors.redAccent,
+          title: Center(child: Text('Report : $customerName')),
         ),
         body: dataBody());
   }

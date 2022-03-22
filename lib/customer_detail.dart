@@ -33,7 +33,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
           deposit.text = '0';
         }
 
-        int customerDue = int.parse(deposit.text) -  int.parse(customerGiven.text);
+        int customerDue = int.parse(customerGiven.text) - int.parse(deposit.text);
 
        reportDb.put(data['customer_id'], Report(
            reportDate:DateTime.now().toString().substring(0,10),
@@ -69,7 +69,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[600],
+        backgroundColor: Colors.redAccent,
         title:  Center(
           child: Text(data['customerName']),
         ),
@@ -78,12 +78,18 @@ class _CustomerDetailState extends State<CustomerDetail> {
 
             width: 100,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context,'/showRepot',arguments: {
+                  'id' :data['customer_id'],
+                  'name' : data['customerName']
+                } );
+              },
               child: Text('REPORT'),
               style: TextButton.styleFrom(
                 textStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-                primary: Colors.pink,
-                backgroundColor: Colors.white,
+                primary: Colors.white,
+                backgroundColor: Color.fromRGBO(
+                    227, 224, 224, 0.2627450980392157),
               ),
             ),
           ),
@@ -211,7 +217,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
                   height: 50,
                   child: RaisedButton(
 
-                      color: Colors.pink[400],
+                      color: Color.fromRGBO(2, 2,2, 2.0),
                       onPressed: () {
                         if(validate()){
                             Navigator.pushNamed(context, '/');
