@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hisab_khata/drawer.dart';
 import 'package:hive/hive.dart';
+import 'package:hisab_khata/home.dart';
 
 //import 'package:hisab_khata/SearchItems.dart';
 
@@ -22,32 +24,33 @@ class _searchState extends State<search> {
     super.initState();
     //customerData.add(Customer(customerName: "Sehedi", customerPhone: '01721'));
 
-      print('run');
-      var customer =  customerData.values.toList();
-      customerDetails= new List<Customer>.from(customer);;
-      print(customerDetails.length);
+    print('run');
+    var customer = customerData.values.toList();
+    customerDetails = new List<Customer>.from(customer);
+    ;
+    print(customerDetails.length);
 
     print('-------');
-    print(customerDetails[12].key);
-
+    //print(customerDetails[12].key);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("Search Customer")),
-        backgroundColor: Colors.blueGrey[800],
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(context: context, delegate: StudentSearch());
-            },
-            icon: Icon(Icons.search),
-          ),
-        ],
-      ),
-      drawer: Drawer(
+        appBar: AppBar(
+          title: Center(child: Text("Search Customer")),
+          backgroundColor: Colors.blueGrey[800],
+          actions: [
+            IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: StudentSearch());
+              },
+              icon: Icon(Icons.search),
+            ),
+          ],
+        ),
+        drawer: Draer(),
+        /*Drawer(
         backgroundColor: Color.fromARGB(255, 11, 168, 230),
         child: ListView(
           children: [
@@ -118,9 +121,21 @@ class _searchState extends State<search> {
             ),
           ],
         ),
-      ),
-
-      body: Container(
+      ),*/
+        body: ListView.builder(
+          itemCount: customerDetails.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+                title: Text(
+                    //customerDetails.elementAt(index),
+                    customerDetails[index].customerName),
+                onTap: () {
+                  //showResults(context)
+                  Navigator.pushNamed(context, '/detail');
+                });
+          },
+        )
+        /* Container(
         child: Padding(
           padding: const EdgeInsets.only(top: 250),
           child: Column(
@@ -141,8 +156,8 @@ class _searchState extends State<search> {
             ],
           ),
         ),
-      ),
-    );
+      ),*/
+        );
   }
 }
 
@@ -205,12 +220,13 @@ class StudentSearch extends SearchDelegate<Customer> {
                             "Due Blance : ${(listItems[index].dueBalance.toString())}"),
                         onTap: () {
                           showResults(context);
-                          Navigator.pushReplacementNamed(context, '/addReport',arguments: {
-                            'customer_id' : listItems[index].key,
-                            'customerName': listItems[index].customerName
+                          Navigator.pushReplacementNamed(context, '/addReport',
+                              arguments: {
+                                'customer_id': listItems[index].key,
+                                'customerName': listItems[index].customerName
 
-                            //ModalRoute.of(context)?.settings.arguments;
-                          });
+                                //ModalRoute.of(context)?.settings.arguments;
+                              });
                         },
                       ),
                       Divider(),

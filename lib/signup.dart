@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:hisab_khata/db.dart';
 import 'package:hive/hive.dart';
+import 'package:hisab_khata/drawer.dart';
 
 class AddCustomer extends StatelessWidget {
   get child => null;
@@ -11,13 +11,13 @@ class AddCustomer extends StatelessWidget {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
 
-
   @override
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   bool validate() {
     if (formkey.currentState!.validate()) {
-      Hive.box('customerData').add(Customer(customerName: nameController.text,
+      Hive.box('customerData').add(Customer(
+          customerName: nameController.text,
           customerEmail: emailController.text,
           customerPhone: phoneController.text));
       print('Ok');
@@ -44,7 +44,8 @@ class AddCustomer extends StatelessWidget {
           child: Text("Hisab Rakhi"),
         ),
       ),
-      drawer: Drawer(
+      drawer: Draer(),
+      /*Drawer(
         backgroundColor: Color.fromARGB(255, 11, 168, 230),
         child: ListView(
           children: [
@@ -115,11 +116,11 @@ class AddCustomer extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ),*/
       body: WillPopScope(
-        onWillPop: ()async{
-           Navigator.pop(context,false);
-           return Future.value(false);
+        onWillPop: () async {
+          Navigator.pop(context, false);
+          return Future.value(false);
         },
         child: Padding(
           padding: EdgeInsets.all(25.0),
@@ -155,7 +156,6 @@ class AddCustomer extends StatelessWidget {
                   child: TextFormField(
                     controller: phoneController,
                     decoration: const InputDecoration(
-
                       labelText: 'Phone Number',
                       border: OutlineInputBorder(),
                     ),
@@ -167,13 +167,12 @@ class AddCustomer extends StatelessWidget {
                   height: 60,
                   child: RaisedButton(
                       color: Color.fromARGB(255, 255, 255, 255),
-                      onPressed:() {
+                      onPressed: () {
                         bool temp = validate();
-                        if(temp){
+                        if (temp) {
                           Navigator.pushNamed(context, '/');
                         }
-
-                  },
+                      },
                       child: const Text(
                         "Add",
                         style: TextStyle(
