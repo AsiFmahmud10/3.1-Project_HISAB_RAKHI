@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:hisab_khata/db.dart';
 import 'package:hive/hive.dart';
@@ -40,7 +39,7 @@ class AddCustomer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 11, 168, 230),
+        backgroundColor: Colors.redAccent,
         title: const Center(
           child: Text("Hisab Rakhi"),
         ),
@@ -163,24 +162,28 @@ class AddCustomer extends StatelessWidget {
                     validator: emailvalidate,
                   ),
                 ),
-                RaisedButton(
-                    color: Color.fromARGB(255, 11, 168, 230),
-                    onPressed:() {
-                      bool temp = validate();
-                      if(temp){
-                        Navigator.pushNamed(context, '/');
-                      }
+                SizedBox(
+                  width: 150,
+                  height: 60,
+                  child: RaisedButton(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      onPressed:() {
+                        bool temp = validate();
+                        if(temp){
+                          Navigator.pushNamed(context, '/');
+                        }
 
-                },
-                    child: const Text(
-                      "Add",
-                      style: TextStyle(
-                        color: Colors.white,
+                  },
+                      child: const Text(
+                        "Add",
+                        style: TextStyle(
+                          color: Colors.black87,
+                        ),
                       ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28.0),
-                    )),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      )),
+                ),
               ],
             ),
           ),
