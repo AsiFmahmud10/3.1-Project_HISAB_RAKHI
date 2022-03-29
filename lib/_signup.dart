@@ -39,7 +39,7 @@ class _SignUpState extends State<SignUp> {
   void addUser(UserData user){
     print(user.toString());
      //userData =  await Hive.openBox('userData');
-     userData.putAt(0,user);
+     userData.put('pass',user);
     print('----------add user');
   }
 
