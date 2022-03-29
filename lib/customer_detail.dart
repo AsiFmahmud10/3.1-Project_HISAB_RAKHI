@@ -39,7 +39,9 @@ class _CustomerDetailState extends State<CustomerDetail> {
            reportDate:DateTime.now().toString().substring(0,10),
            details: description.text,
            customerGiven:int.parse(deposit.text),
-           customerDue:customerDue
+           customerDue:customerDue,
+           customerName:data['customerName'],
+           customerId: data['customer_id'],
        ));
       print(reportDb.values.toList());
       print('Ok');

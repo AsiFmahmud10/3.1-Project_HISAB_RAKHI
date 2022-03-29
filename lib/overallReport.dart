@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:hisab_khata/db.dart';
 import 'package:hive/hive.dart';
 
-class DataReport extends StatefulWidget {
-  const DataReport({Key? key}) : super(key: key);
+class OverAllReport extends StatefulWidget {
+  const OverAllReport({Key? key}) : super(key: key);
 
   @override
-  State<DataReport> createState() => _DataReportState();
+  State<OverAllReport> createState() => _OverAllDataReportState();
 }
 
-class _DataReportState extends State<DataReport> {
+class _OverAllDataReportState extends State<OverAllReport> {
 
   List reportData = Hive.box('reportData').values.toList();
 
-   var data ;
-   void initState() {
+  var data ;
+  void initState() {
     super.initState();
     print('----------');
     print(reportData);
@@ -23,7 +23,11 @@ class _DataReportState extends State<DataReport> {
   DataTable dataBody() {
     return DataTable(
       columns: [
-
+        DataColumn(
+          label: Text('Name'),
+          numeric: false,
+          tooltip: "Name",
+        ),
         DataColumn(
           label: Text('Date'),
           numeric: false,
@@ -34,27 +38,23 @@ class _DataReportState extends State<DataReport> {
           numeric: false,
           tooltip: "Deposit",
         ),
-        DataColumn(
-          label: Text('Given'),
-          numeric: false,
-          tooltip: "Name",
-        ),
+
       ],
       rows: reportData
           .map((UserReoprtData) => DataRow(
-                cells: [
-                  DataCell(
-                    Text(UserReoprtData.reportDate ?? 'null'),
-                  ),
-                  DataCell(
-                    Text(UserReoprtData.customerDue.toString()  ?? 'null'),
-                  ),
-                  DataCell(
-                    Text(UserReoprtData.customerGiven.toString() ?? 'null' ),
-                  ),
+        cells: [
+          DataCell(
+            Text(UserReoprtData.reportDate ?? 'null'),
+          ),
+          DataCell(
+            Text(UserReoprtData.customerDue.toString()  ?? 'null'),
+          ),
+          DataCell(
+            Text(UserReoprtData.customerGiven.toString() ?? 'null' ),
+          ),
 
-                ],
-              ))
+        ],
+      ))
           .toList(),
     );
   }
@@ -66,8 +66,7 @@ class _DataReportState extends State<DataReport> {
     print(data);
     String customerName = data['name'] ;
     String id = data['id'].toString();
-    reportData = reportData.where((element) => element.customerId ==id).toList();
-    print(reportData);
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent,

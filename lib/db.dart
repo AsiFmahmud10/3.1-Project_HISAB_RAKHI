@@ -54,15 +54,23 @@ class Report{
   var reportDate;
   @HiveField(4)
   String details;
+  @HiveField(5)
+  String customerName;
+  @HiveField(6)
+  String customerId;
+
 
   String toString(){
     return jsonEncode({
       'deposit' : customerGiven,
       'due' : customerDue,
       'date': reportDate,
-      'details': details
+      'details': details,
+      'customerName':customerName,
+      'customerId' : customerId
     });
   }
 
-  Report({this.customerDue=0,this.customerGiven=0,required this.reportDate,required this.details});
+  Report({this.customerDue=0,this.customerGiven=0,required this.reportDate,required this.details,
+  required this.customerId,required this.customerName});
 }

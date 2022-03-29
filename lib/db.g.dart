@@ -110,13 +110,15 @@ class ReportAdapter extends TypeAdapter<Report> {
       customerGiven: fields[0] as int,
       reportDate: fields[3] as dynamic,
       details: fields[4] as String,
+      customerId: fields[6] as String,
+      customerName: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Report obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.customerGiven)
       ..writeByte(1)
@@ -124,7 +126,11 @@ class ReportAdapter extends TypeAdapter<Report> {
       ..writeByte(3)
       ..write(obj.reportDate)
       ..writeByte(4)
-      ..write(obj.details);
+      ..write(obj.details)
+      ..writeByte(5)
+      ..write(obj.customerName)
+      ..writeByte(6)
+      ..write(obj.customerId);
   }
 
   @override
