@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'drawer.dart';
+
 class menu extends StatelessWidget {
   const menu({Key? key}) : super(key: key);
 
@@ -48,78 +50,7 @@ class menu extends StatelessWidget {
           ),
         ),
       ),
-      drawer: Drawer(
-        backgroundColor:Color.fromARGB(255, 11, 168, 230),
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: (Container(
-                child: const Center(
-                  child: Text(
-                    'Hisab Rakhi',
-                    style: TextStyle(
-                      fontSize: 50,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                //color: Color.fromARGB(255, 7, 145, 214),
-              )),
-            ),
-            Divider(
-              thickness: 4.0,
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.home),
-              title: const Text(
-                'Home',
-                style: TextStyle(
-                  fontSize: 18,
-                    color: Colors.white,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.person),
-              title: const Text(
-                'Customer',
-                style: TextStyle(
-                  fontSize: 18,
-                    color: Colors.white
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.report),
-              title: const Text(
-                'Report',
-                style: TextStyle(
-                  fontSize: 18,
-                    color: Colors.white,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.settings),
-              title: const Text(
-                'Setting',
-                style: TextStyle(
-                  fontSize: 18,
-                    color: Colors.white,
-                ),
-              ),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer: Draer(),
       body: Container(
         margin: const EdgeInsets.all(10.0),
         child: Center(

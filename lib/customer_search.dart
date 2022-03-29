@@ -43,85 +43,14 @@ class _searchState extends State<search> {
           actions: [
             IconButton(
               onPressed: () {
-                showSearch(context: context, delegate: StudentSearch());
+                showSearch(context: context, delegate: CustomerSearch());
               },
               icon: Icon(Icons.search),
             ),
           ],
         ),
         drawer: Draer(),
-        /*Drawer(
-        backgroundColor: Color.fromARGB(255, 11, 168, 230),
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: (Container(
-                child: const Center(
-                  child: Text(
-                    'Hisab Rakhi',
-                    style: TextStyle(
-                      fontSize: 50,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                //color: Color.fromARGB(255, 7, 145, 214),
-              )),
-            ),
-            Divider(
-              thickness: 4.0,
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.home),
-              title: const Text(
-                'Home',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.person),
-              title: const Text(
-                'Customer',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.report),
-              title: const Text(
-                'Report',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              leading: Icon(Icons.settings),
-              title: const Text(
-                'Setting',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),*/
+
         body: ListView.builder(
           itemCount: customerDetails.length,
           itemBuilder: (BuildContext context, int index) {
@@ -131,38 +60,29 @@ class _searchState extends State<search> {
                     customerDetails[index].customerName),
                 onTap: () {
                   //showResults(context)
-                  Navigator.pushNamed(context, '/detail');
-                });
+                  Navigator.pushReplacementNamed(context, '/addReport',
+                      arguments: {
+                        'customer_id': customerDetails[index].key,
+                        'customerName': customerDetails[index].customerName
+
+                        //ModalRoute.of(context)?.settings.arguments;
+                      });
+
+                }
+                );
+            Divider(
+              thickness: 30,
+              color: Colors.blueGrey,
+            );
           },
         )
-        /* Container(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 250),
-          child: Column(
-            children: [
-              Center(
-                child: SizedBox(
-                  width: 250,
-                  height: 70,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/add');
-                    },
-                    child: Text("ADD CUSTOMER"),
-                    style: ButtonStyle(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),*/
         );
   }
 }
 
-class StudentSearch extends SearchDelegate<Customer> {
+class CustomerSearch extends SearchDelegate<Customer> {
   @override
+
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(

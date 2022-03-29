@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 
@@ -86,34 +85,37 @@ Future<dynamic> showExitPopUp(){
                       SizedBox(
                           height: 120),
                       //Text(userData.get(0).pin ),//----------------------------------------,
-                      Container(
-                        alignment: Alignment.center,
-                        width: 340,
-                        child: TextField(
-                          obscureText: true,
-                          onSubmitted: (submittedPin){
-                             print(submittedPin);
-                            if(submittedPin == userData.get(0).pin){//------------------------
-                                Navigator.pushNamed(context, '/menu');
-                            }else{
-                              setState(() {
-                                showInfo = "Invalid Pin";
-                              });
-                            }
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            width: 340,
+                            child: TextField(
+                              obscureText: true,
+                              onSubmitted: (submittedPin){
+                                 print('---sub_pin $submittedPin userpin ${userData.get('pass').pin}');
+                                if(submittedPin == userData.get('pass').pin){//------------------------
+                                    Navigator.pushNamed(context, '/menu');
+                                }else{
+                                  setState(() {
+                                    showInfo = "Invalid Pin";
+                                  });
+                                }
+                              },
+                              textAlign: TextAlign.center,
+                              decoration:InputDecoration(
+                                  hintText: 'ENTER PIN',
+                                  hintStyle: TextStyle(letterSpacing:3,fontWeight: FontWeight.bold,fontSize: 17 ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
 
+                                  )
+                              ) ,
+                            ),
 
-                          },
-                          textAlign: TextAlign.center,
-                          decoration:InputDecoration(
-                              hintText: 'ENTER PIN',
-                              hintStyle: TextStyle(letterSpacing:3,fontWeight: FontWeight.bold,fontSize: 17 ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-
-                              )
-                          ) ,
-                        ),
-
+                          ),
+                        ],
                       ),
 
                       Container(
@@ -131,21 +133,16 @@ Future<dynamic> showExitPopUp(){
                                       fontWeight: FontWeight.w500,
                                       fontSize: 20,
                                       color: Colors.pink,
-
                                     )
                                 ),
-
                               ],
-
                               )
-
                           )
                       ),
 
                       SizedBox(
                           height: 30),
-                      Lottie.network('https://assets4.lottiefiles.com/packages/lf20_x8bgchwo.json'),
-                    // Lottie.asset('assets/type.json'),
+                     Lottie.asset('assets/type1.json'),
 
                     ],
 

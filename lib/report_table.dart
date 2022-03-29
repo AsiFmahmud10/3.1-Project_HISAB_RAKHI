@@ -20,7 +20,25 @@ class _DataReportState extends State<DataReport> {
     print(reportData);
   }
 
-  DataTable dataBody() {
+  Future<dynamic> showExitPopUp(String str) {
+    return showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text("Details"),
+        content: Text(str),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("close"),
+          ),
+
+        ],
+      );
+    });
+  }
+
+    DataTable dataBody() {
     return DataTable(
       columns: [
 
@@ -38,6 +56,10 @@ class _DataReportState extends State<DataReport> {
           label: Text('Given'),
           numeric: false,
           tooltip: "Name",
+        ),DataColumn(
+          label: Text('Details'),
+          numeric: false,
+          tooltip: "details",
         ),
       ],
       rows: reportData
@@ -47,10 +69,16 @@ class _DataReportState extends State<DataReport> {
                     Text(UserReoprtData.reportDate ?? 'null'),
                   ),
                   DataCell(
-                    Text(UserReoprtData.customerDue.toString()  ?? 'null'),
+                    Text(UserReoprtData.customerDue.toString()),
                   ),
                   DataCell(
-                    Text(UserReoprtData.customerGiven.toString() ?? 'null' ),
+                    Text(UserReoprtData.customerGiven.toString()),
+                  ),
+                  DataCell(
+                    Text(UserReoprtData.details.toString().substring(0,4)+'....'),
+                    onTap: (){
+                       showExitPopUp(UserReoprtData.details.toString());
+                    }
                   ),
 
                 ],
