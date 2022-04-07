@@ -100,7 +100,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
           ),
         ],
       ),
-     drawer: Draer(),
+
       body: WillPopScope(
         onWillPop: () async {
           Navigator.pop(context, false);
@@ -154,7 +154,13 @@ class _CustomerDetailState extends State<CustomerDetail> {
                       color: Color.fromRGBO(2, 2,2, 2.0),
                       onPressed: () {
                         if(validate()){
-                            Navigator.pushNamed(context, '/');
+                          Navigator.pushReplacementNamed(context, '/customerInfo',
+                              arguments: {
+                                'customer_id': data['customer_id'],
+                                'customerName': data['customerName']
+
+                                //ModalRoute.of(context)?.settings.arguments;
+                              });
                         }
                       },
                       child: const Text(

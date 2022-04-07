@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hisab_khata/Controller/customerdetailsContoller.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:hive/hive.dart';
 
 import 'db.dart';
@@ -20,12 +20,11 @@ class _CustomerInfoState extends State<CustomerInfo> {
   var data;
 
 
-  Widget _Text(String txt){
-      return Text(txt,
-      style:TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 30
-      ),
+  TextStyle _TextStyle(){
+      return TextStyle(fontWeight: FontWeight.bold,
+          fontSize: 23,
+          color: Colors.blueGrey,
+          fontFamily: 'Lato'
       );
 
   }
@@ -35,57 +34,104 @@ class _CustomerInfoState extends State<CustomerInfo> {
   Widget build(BuildContext context) {
 
     data = ModalRoute.of(context)!.settings.arguments ;
-    var customer =  customerData.where((element) => element.key==data['id']).toList() ;
-    print(customerData[0].customerName);
+    print('data : $data');
+    Customer customer =  customerData.where((element) => element.key==data['customer_id']).toList()[0] ;
+    print(customer);
+    print(data['customer_id'].runtimeType);
     return Scaffold(
       appBar: AppBar(
         title: Center(child : Text("Customer Details")),
         backgroundColor: Colors.redAccent,
       ),
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-        Text('Name : ',
-        style:TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30
-        ),
-      ),
-          Text('Email : ${'customer.customerEmail'}',
-            style:TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 80,
+
             ),
-          ),
-          Text('Phone : ${'customer.customerPhone'}',
-            style:TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30
+          Text('Name : ${customer.customerName}',
+          style:_TextStyle(),
             ),
-          ),
+
+            SizedBox(
+              height: 20,
+            ),
 
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-           children: <Widget>[
-              SizedBox(
-                width: 140,
-                height: 40,
-                child: ElevatedButton(onPressed: (){
-                },
-                    child: Text("REPORT")),
+            Text('Email : ${customer.customerEmail}',
+              style:_TextStyle(),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+
+            SizedBox(
+              width: 180,
+              height: 50,
+              child: ElevatedButton.icon(onPressed: ()async{
+                FlutterPhoneDirectCaller.callNumber(customer.customerPhone.toString());
+              }, icon: Icon(Icons.call_end_rounded,
+              color: Colors.blueAccent,), label: Text('CALL'),
+                style:ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color.fromRGBO(0,0,0,0)))
+                ),
+
+
               ),
-             SizedBox(
-               width: 140,
-               height: 40,
-               child: ElevatedButton(onPressed: (){
-               },
-                   child: Text("ADD HISAB")),
-             )
 
-           ]
-         ),
-       ],
+
+
+SizedBox(
+  height: 300,
+),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+             children: <Widget>[
+                SizedBox(
+                  width: 140,
+                  height: 40,
+                  child: ElevatedButton(onPressed: (){
+                    Navigator.pushReplacementNamed(context, '/customerDetails',
+                        arguments: {
+                          'customer_id': data['customer_id'],
+                          'customerName': data['customerName']
+
+                          //ModalRoute.of(context)?.settings.arguments;
+                        });
+                  },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.blue[400])
+                      ),
+                      child: Text("ADD HISAB")),
+
+                ),
+               SizedBox(
+                 width: 140,
+                 height: 40,
+                 child: ElevatedButton(onPressed: (){
+                   Navigator.pushReplacementNamed(context, '/report_table',
+                       arguments: {
+                         'id': data['customer_id'],
+                         'name': data['customerName']
+
+                         //ModalRoute.of(context)?.settings.arguments;
+                       });
+
+                 },
+                     style: ButtonStyle(
+                       backgroundColor: MaterialStateProperty.all(Colors.red[400])
+                     ),
+                     child: Text("REPORT")),
+               )
+
+             ]
+           ),
+         ],
+        ),
       ),
     );
   }

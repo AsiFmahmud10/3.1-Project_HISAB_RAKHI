@@ -59,21 +59,22 @@ class _searchState extends State<search> {
                 subtitle: Text('Due Balance :'+ customerDetails[index].dueBalance.toString()),
                 onTap: () {
                   //showResults(context)
+                  /*
                  Navigator.pushReplacementNamed(context, '/customerDetails',
                       arguments: {
                         'customer_id': customerDetails[index].key,
                         'customerName': customerDetails[index].customerName
 
                         //ModalRoute.of(context)?.settings.arguments;
-                      });
-                  /*
+                      });*/
+
                   Navigator.pushReplacementNamed(context, '/customerInfo',
                       arguments: {
                         'customer_id': customerDetails[index].key,
                         'customerName': customerDetails[index].customerName
 
                         //ModalRoute.of(context)?.settings.arguments;
-                      }); */
+                      });
 
                 }
                 );

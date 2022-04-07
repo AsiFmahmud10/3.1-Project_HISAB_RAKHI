@@ -16,7 +16,7 @@ class Draer extends StatelessWidget {
                 child: Text(
                   'Hisab Rakhi',
                   style: TextStyle(
-                    fontSize: 50,
+                    fontSize: 30,
                     color: Colors.blueGrey,
                   ),
                 ),

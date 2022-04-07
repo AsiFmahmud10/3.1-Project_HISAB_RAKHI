@@ -91,7 +91,7 @@ class _DataReportState extends State<DataReport> {
   Widget build(BuildContext context) {
 
     data =  ModalRoute.of(context)!.settings.arguments ;
-    //print(data);
+    print(data);
     String customerName = data['name'] ;
     String id = data['id'].toString();
    modfiData = List<Report>.from(reportData.where((element) => element.customerId ==id).toList());

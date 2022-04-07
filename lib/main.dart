@@ -7,7 +7,7 @@ import 'package:hisab_khata/menu.dart';
 import 'package:hisab_khata/home.dart';
 import 'package:hisab_khata/signup.dart';
 import 'package:hisab_khata/report_table.dart';
-import 'package:hisab_khata/customer_detail.dart';
+import 'package:hisab_khata/addCustomerReport.dart';
 
 import '_home.dart';
 import 'package:hisab_khata/customer_search.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/': (context) => search(),
-        '/showRepot': (context) => DataReport(),
+        '/report_table': (context) => DataReport(),
         '/customerDetails': (context) => CustomerDetail(),
         '/menu': (context) => menu(),
         '/signup': (context) => SignUp(),
