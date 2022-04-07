@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hisab_khata/customerInfo.dart';
 import 'package:hisab_khata/db.dart';
 import 'package:hisab_khata/signin.dart';
 import 'package:hisab_khata/_signup.dart';
@@ -38,13 +39,14 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => search(),
         '/showRepot': (context) => DataReport(),
-        '/addReport': (context) => CustomerDetail(),
+        '/customerDetails': (context) => CustomerDetail(),
         '/menu': (context) => menu(),
         '/signup': (context) => SignUp(),
         '/signin': (context) => signin(),
         //'/search': (context) => search(),
         '/home': (context) => Home(),
         '/add': (context) => AddCustomer(),
+        '/customerInfo': (context) => CustomerInfo(),
       },
     );
   }

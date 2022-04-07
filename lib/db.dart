@@ -62,9 +62,9 @@ class Report{
 
   String toString(){
     return jsonEncode({
-      'deposit' : customerGiven,
-      'due' : customerDue,
-      'date': reportDate,
+      'customerGiven' : customerGiven,
+      'customerDue' : customerDue,
+      'reportDate': reportDate,
       'details': details,
       'customerName':customerName,
       'customerId' : customerId

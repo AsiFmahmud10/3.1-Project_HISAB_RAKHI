@@ -4,8 +4,6 @@ import 'package:hisab_khata/drawer.dart';
 import 'package:hive/hive.dart';
 import 'package:hisab_khata/home.dart';
 
-//import 'package:hisab_khata/SearchItems.dart';
-
 import 'db.dart';
 
 List<Customer> customerDetails = [];
@@ -27,7 +25,7 @@ class _searchState extends State<search> {
     print('run');
     var customer = customerData.values.toList();
     customerDetails = new List<Customer>.from(customer);
-    ;
+
     print(customerDetails.length);
 
     print('-------');
@@ -58,15 +56,24 @@ class _searchState extends State<search> {
                 title: Text(
                     //customerDetails.elementAt(index),
                     customerDetails[index].customerName),
+                subtitle: Text('Due Balance :'+ customerDetails[index].dueBalance.toString()),
                 onTap: () {
                   //showResults(context)
-                  Navigator.pushReplacementNamed(context, '/addReport',
+                 Navigator.pushReplacementNamed(context, '/customerDetails',
                       arguments: {
                         'customer_id': customerDetails[index].key,
                         'customerName': customerDetails[index].customerName
 
                         //ModalRoute.of(context)?.settings.arguments;
                       });
+                  /*
+                  Navigator.pushReplacementNamed(context, '/customerInfo',
+                      arguments: {
+                        'customer_id': customerDetails[index].key,
+                        'customerName': customerDetails[index].customerName
+
+                        //ModalRoute.of(context)?.settings.arguments;
+                      }); */
 
                 }
                 );
@@ -137,7 +144,7 @@ class CustomerSearch extends SearchDelegate<Customer> {
                         ),
                         title: Text(listItems[index].customerName),
                         subtitle: Text(
-                            "Due Blance : ${(listItems[index].dueBalance.toString())}"),
+                            "Due Balance : "+ listItems[index].dueBalance.toString()),
                         onTap: () {
                           showResults(context);
                           Navigator.pushReplacementNamed(context, '/addReport',
@@ -149,8 +156,9 @@ class CustomerSearch extends SearchDelegate<Customer> {
                               });
                         },
                       ),
-                      Divider(),
+
                     ],
+
                   ));
             });
   }

@@ -12,7 +12,7 @@ class DataReport extends StatefulWidget {
 class _DataReportState extends State<DataReport> {
 
   List reportData = Hive.box('reportData').values.toList();
-
+  late List <Report> modfiData ;
    var data ;
    void initState() {
     super.initState();
@@ -44,29 +44,29 @@ class _DataReportState extends State<DataReport> {
 
         DataColumn(
           label: Text('Date'),
-          numeric: false,
-          tooltip: "Due",
+         // numeric: false,
+         // tooltip: "Due",
         ),
         DataColumn(
           label: Text('Due'),
-          numeric: false,
-          tooltip: "Deposit",
+         // numeric: false,
+         // tooltip: "Deposit",
         ),
         DataColumn(
           label: Text('Given'),
-          numeric: false,
-          tooltip: "Name",
+          //numeric: false,
+          //tooltip: "Name",
         ),DataColumn(
           label: Text('Details'),
-          numeric: false,
-          tooltip: "details",
+          //numeric: false,
+          //tooltip: "details",
         ),
       ],
-      rows: reportData
-          .map((UserReoprtData) => DataRow(
+      rows: modfiData.map((Report UserReoprtData) => DataRow(
+
                 cells: [
                   DataCell(
-                    Text(UserReoprtData.reportDate ?? 'null'),
+                    Text(UserReoprtData.reportDate), // ??
                   ),
                   DataCell(
                     Text(UserReoprtData.customerDue.toString()),
@@ -75,7 +75,7 @@ class _DataReportState extends State<DataReport> {
                     Text(UserReoprtData.customerGiven.toString()),
                   ),
                   DataCell(
-                    Text(UserReoprtData.details.toString().substring(0,4)+'....'),
+                    Text(UserReoprtData.details.toString().substring(0,2)+'..'),
                     onTap: (){
                        showExitPopUp(UserReoprtData.details.toString());
                     }
@@ -91,16 +91,18 @@ class _DataReportState extends State<DataReport> {
   Widget build(BuildContext context) {
 
     data =  ModalRoute.of(context)!.settings.arguments ;
-    print(data);
+    //print(data);
     String customerName = data['name'] ;
     String id = data['id'].toString();
-    reportData = reportData.where((element) => element.customerId ==id).toList();
-    print(reportData);
+   modfiData = List<Report>.from(reportData.where((element) => element.customerId ==id).toList());
+    print('--------ufff------------');
+    print(modfiData);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent,
           title: Center(child: Text('Report : $customerName')),
         ),
-        body: dataBody());
+        body: dataBody(),
+    );
   }
 }

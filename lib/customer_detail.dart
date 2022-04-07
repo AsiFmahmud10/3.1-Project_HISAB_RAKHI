@@ -19,6 +19,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
 
   final description = TextEditingController();
   Box reportDb = Hive.box('reportData');
+  Box customerData = Hive.box('customerData');
 
 
   @override
@@ -36,16 +37,20 @@ class _CustomerDetailState extends State<CustomerDetail> {
 
         int customerDue = int.parse(customerGiven.text) - int.parse(deposit.text);
 
-       reportDb.put(data['customer_id'], Report(
+       reportDb.add(Report(
            reportDate:DateTime.now().toString().substring(0,10),
            details: description.text,
            customerGiven:int.parse(deposit.text),
            customerDue:customerDue,
            customerName:data['customerName'],
-           customerId: data['customer_id'],
+           customerId: data['customer_id'].toString(),
        ));
+       print('hululu');
+      Customer customer = customerData.get(data['customer_id']);
+      customer.dueBalance = customer.dueBalance + customerDue;
+      customer.save();
+
       print(reportDb.values.toList());
-      print('Ok');
       return true;
     } else {
       print('required');
@@ -60,9 +65,6 @@ class _CustomerDetailState extends State<CustomerDetail> {
       return null;
     }
   }
-
-
-
 
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments ;
@@ -116,7 +118,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
                   child: TextFormField(
                     controller: deposit,
                     decoration: const InputDecoration(
-                      labelText: 'Get',
+                      labelText: 'Given',
                       border: OutlineInputBorder(),
                     ),
                     validator: emailvalidate,
@@ -127,7 +129,7 @@ class _CustomerDetailState extends State<CustomerDetail> {
                   child: TextFormField(
                     controller: customerGiven,
                     decoration: const InputDecoration(
-                      labelText: 'Value',
+                      labelText: 'Price',
                       border: OutlineInputBorder(),
                     ),
                     validator: emailvalidate,

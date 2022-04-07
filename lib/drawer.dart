@@ -68,7 +68,7 @@ class Draer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.pushNamed(context, '/search');
+              Navigator.pushNamed(context, '/');
             },
           ),
         ],
