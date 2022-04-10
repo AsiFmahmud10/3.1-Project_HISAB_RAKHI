@@ -70,15 +70,17 @@ class _CustomerInfoState extends State<CustomerInfo> {
             ),
 
             SizedBox(
-              width: 180,
-              height: 50,
+              width: 170,
+              height: 45,
               child: ElevatedButton.icon(onPressed: ()async{
                 FlutterPhoneDirectCaller.callNumber(customer.customerPhone.toString());
               }, icon: Icon(Icons.call_end_rounded,
-              color: Colors.blueAccent,), label: Text('CALL'),
-                style:ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color.fromRGBO(0,0,0,0)))
-                ),
+              color: Colors.white,), label: Text('CALL'),
+                style:ElevatedButton.styleFrom(
+
+                  )
+                )
+
 
 
               ),
