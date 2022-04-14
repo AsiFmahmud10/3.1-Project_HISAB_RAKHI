@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hisab_khata/custom/pdfApi.dart';
 import 'package:hisab_khata/db.dart';
 import 'package:hive/hive.dart';
 
@@ -13,6 +14,8 @@ class _DataReportState extends State<DataReport> {
 
   List reportData = Hive.box('reportData').values.toList();
   late List <Report> modfiData ;
+
+
    var data ;
    void initState() {
     super.initState();
@@ -41,25 +44,15 @@ class _DataReportState extends State<DataReport> {
     DataTable dataBody() {
     return DataTable(
       columns: [
-
         DataColumn(
-          label: Text('Date'),
-         // numeric: false,
-         // tooltip: "Due",
-        ),
+          label: Text('Date')),
         DataColumn(
-          label: Text('Due'),
-         // numeric: false,
-         // tooltip: "Deposit",
-        ),
+          label: Text('Due')),
         DataColumn(
           label: Text('Given'),
-          //numeric: false,
-          //tooltip: "Name",
+
         ),DataColumn(
           label: Text('Details'),
-          //numeric: false,
-          //tooltip: "details",
         ),
       ],
       rows: modfiData.map((Report UserReoprtData) => DataRow(
@@ -95,14 +88,36 @@ class _DataReportState extends State<DataReport> {
     String customerName = data['name'] ;
     String id = data['id'].toString();
    modfiData = List<Report>.from(reportData.where((element) => element.customerId ==id).toList());
+
+   Future fillData()async{
+
+     PdfApi pdfApi = PdfApi();
+     pdfApi.fillCustomerData(modfiData);
+     var pfdFile = await pdfApi.generateTable();
+     await pdfApi.openFile(pfdFile);
+   }
+
+
+
     print('--------ufff------------');
     print(modfiData);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.redAccent,
           title: Center(child: Text('Report : $customerName')),
+
         ),
-        body: dataBody(),
+        body:Column(
+          children: [
+            ElevatedButton.icon(
+                onPressed: () async{
+                   await fillData();
+
+                },
+                icon: Icon(Icons.save), label: Text('asd')),
+            dataBody(),
+          ],
+        )
     );
   }
 }

@@ -20,6 +20,83 @@ class _SignUpState extends State<SignUp> {
   late String pin ='';
   late String phoneNumber ='';
   late String username ='';
+  late String cnfrmPin ='';
+  bool valid = true;
+
+   String userNameError ='';
+   String pinError ='';
+   String phoneNumberError ='';
+   String confirmError ='';
+
+  void validate(){
+    if(username.isEmpty){
+        setState(() {
+          valid = false;
+          userNameError ='username is empty';
+        });
+    }else{
+      valid = true;
+      userNameError ='';
+    }
+    if(phoneNumber.isEmpty){
+        setState(() {
+          valid = false;
+          phoneNumberError = 'Enter Phone Number';
+        });
+    }else if(int.tryParse(phoneNumber) == null){
+        setState(() {
+          valid = false;
+          phoneNumberError = "Enter Valid Phone Number";
+        });
+    }else{
+      valid = true;
+      phoneNumberError ='';
+    }
+
+    if(cnfrmPin.isEmpty){
+      setState(() {
+        valid = false;
+        confirmError = "Enter Confirm Pin";
+      });
+
+    }else{
+      setState(() {
+        valid = true;
+        confirmError = "";
+      });
+    };
+
+
+
+    if(pin.isEmpty ){
+      setState(() {
+        valid = false;
+        pinError = 'Enter Pin';
+      });
+    }else{
+      setState(() {
+        valid = true;
+        pinError = '';
+      });
+    }
+    if(pin != cnfrmPin){
+         valid = false;
+         setState(() {
+           confirmError = 'pin and confirm pin are not same.';
+         });
+
+    }else{
+      setState(() {
+        valid = true;
+        confirmError = '';
+      });
+    }
+
+
+
+  }
+
+
 
 
   @override
@@ -64,6 +141,9 @@ void getUserData(index){
          pin = inputData;
          print(pin);
 
+    }else if(label == 'Confirm Pin'){
+      cnfrmPin = inputData;
+      print('cnfrmPin $cnfrmPin');
     }
 
   }
@@ -100,8 +180,12 @@ void getUserData(index){
 
                     onPressed: (){
                         print('---------b email ${username} Pin ${pin} phone ${phoneNumber} ');
-                        addUser(UserData(username: username,pin: pin,number: phoneNumber ));
-                        Navigator.pushNamed(context, '/menu');
+                        validate();
+                        if(valid ){
+                          addUser(UserData(username: username,pin: pin,number: phoneNumber ));
+                          Navigator.pushNamed(context, '/menu');
+                        };
+
 
                       //----------------------
                         //addUser( new UserData("errorwhy","errorwhy","errorwhy"));//------------------------------------
@@ -117,6 +201,47 @@ void getUserData(index){
 
                 ),
               ),
+                SizedBox(
+                  height: 20,
+                ),
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  if(!userNameError.isEmpty)...[
+                    Text(userNameError,
+                    style:TextStyle(
+                      color: Colors.red,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold
+                    )
+                    )
+                  ],
+                  if(!pinError.isEmpty)...[
+                    Text(pinError, style:TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                    ))
+                  ],
+                  if(!phoneNumberError.isEmpty)...[
+                    Text(phoneNumberError, style:TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                    ))
+                  ],
+                  if(!confirmError.isEmpty)...[
+                    Text(confirmError, style:TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                    ))
+                  ]
+                ],
+              ),
+
+
 
             ],
           ),

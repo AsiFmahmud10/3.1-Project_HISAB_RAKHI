@@ -36,8 +36,11 @@ class _CustomInputState extends State<CustomInput> {
     return  Container(
       margin: EdgeInsets.only(top:2.3,bottom: 2.3),
         child: TextField(
-          onSubmitted: (String str){
+          /*onSubmitted: (String str){
              widget.getData(str,widget.label);
+          },*/
+          onChanged: (String str){
+            widget.getData(str,widget.label);
           },
           controller: inputController,
           obscureText: widget.password,
