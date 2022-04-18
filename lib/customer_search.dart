@@ -47,7 +47,6 @@ class _searchState extends State<search> {
             ),
           ],
         ),
-        drawer: Draer(),
 
         body: ListView.builder(
           itemCount: customerDetails.length,
@@ -58,15 +57,6 @@ class _searchState extends State<search> {
                     customerDetails[index].customerName),
                 subtitle: Text('Due Balance :'+ customerDetails[index].dueBalance.toString()),
                 onTap: () {
-                  //showResults(context)
-                  /*
-                 Navigator.pushReplacementNamed(context, '/customerDetails',
-                      arguments: {
-                        'customer_id': customerDetails[index].key,
-                        'customerName': customerDetails[index].customerName
-
-                        //ModalRoute.of(context)?.settings.arguments;
-                      });*/
 
                   Navigator.pushReplacementNamed(context, '/customerInfo',
                       arguments: {
@@ -78,10 +68,7 @@ class _searchState extends State<search> {
 
                 }
                 );
-            Divider(
-              thickness: 30,
-              color: Colors.blueGrey,
-            );
+
           },
         )
         );
@@ -148,10 +135,11 @@ class CustomerSearch extends SearchDelegate<Customer> {
                             "Due Balance : "+ listItems[index].dueBalance.toString()),
                         onTap: () {
                           showResults(context);
-                          Navigator.pushReplacementNamed(context, '/addReport',
+
+                          Navigator.pushReplacementNamed(context, '/customerInfo',
                               arguments: {
-                                'customer_id': listItems[index].key,
-                                'customerName': listItems[index].customerName
+                                'customer_id': customerDetails[index].key,
+                                'customerName': customerDetails[index].customerName
 
                                 //ModalRoute.of(context)?.settings.arguments;
                               });

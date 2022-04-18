@@ -11,7 +11,7 @@ class CustomerDetails{
    final String name;
    final String due;
    final String given;
-  final String date;
+   final String date;
    const CustomerDetails({
      required this.name,
      required this.due,
