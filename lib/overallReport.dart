@@ -35,7 +35,7 @@ class _OverAllDataReportState extends State<OverAllReport> {
         ),
         DataColumn(
           label: Text('Due'),
-          numeric: false,
+          numeric: false, 
           tooltip: "Deposit",
         ),
 
